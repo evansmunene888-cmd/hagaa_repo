@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Hagaa?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Garamond', 'Georgia', serif;
+            background: linear-gradient(135deg, #1a0f0a 0%, #3d1f1a 50%, #1a0f0a 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #f4d9c6;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            background: rgba(20, 10, 8, 0.85);
+            border: 3px solid #d4af37;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.4), inset 0 0 30px rgba(212, 175, 55, 0.1);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 40px;
+            background: linear-gradient(to right, #d4af37, #f0e68c, #d4af37);
+            clip-path: polygon(0% 100%, 5% 40%, 10% 20%, 20% 10%, 30% 5%, 50% 0%, 70% 5%, 80% 10%, 90% 20%, 95% 40%, 100% 100%);
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #d4af37;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .image-display {
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            margin: 30px auto;
+            border: 3px solid #d4af37;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            background: #0a0605;
+        }
+
+        .image-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .snack-caption {
+            font-size: 1.8em;
+            color: #d4af37;
+            margin: 20px 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            min-height: 60px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border: 2px solid #d4af37;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Garamond', serif;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #d4af37, #f0e68c);
+            color: #1a0f0a;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+        }
+
+        .no-btn {
+            background: rgba(139, 35, 35, 0.7);
+            color: #d4af37;
+            position: relative;
+        }
+
+        .no-btn:hover {
+            background: rgba(178, 45, 45, 0.8);
+        }
+
+        .crown {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .image-display {
+                height: 350px;
+                margin: 20px auto;
+            }
+
+            .button-container {
+                gap: 10px;
+            }
+
+            button {
+                padding: 12px 25px;
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="crown">👑✨</div>
+        
+        <h1>Will You Be My Hagaa?</h1>
+        
+        <div class="image-display">
+            <img src="main.png" alt="Royal couple" id="mainImage">
+        </div>
+
+        <div class="snack-caption" id="caption"></div>
+
+        <div class="button-container">
+            <button class="yes-btn" onclick="yesClicked()">YES, I WILL ❤️</button>
+            <button class="no-btn" id="noBtn" onclick="noClicked()">NO 😭</button>
+        </div>
+
+        <div class="crown" style="margin-top: 40px;">✨💕</div>
+    </div>
+
+    <script>
+        const snacks = [
+            { src: 'ice-cream.png', caption: 'Nikona Ice Cream 🍦' },
+            { src: 'njugu.png', caption: 'Nikona Njugu 🥜' },
+            { src: 'chips.png', caption: 'Nikona Chips 🍟' }
+        ];
+
+        let clickCount = 0;
+
+        function noClicked() {
+            const caption = document.getElementById('caption');
+            const img = document.getElementById('mainImage');
+            
+            const snackIndex = clickCount % snacks.length;
+            const snack = snacks[snackIndex];
+            
+            img.src = snack.src;
+            caption.textContent = snack.caption;
+            
+            clickCount++;
+        }
+
+        function yesClicked() {
+            // Redirect to yes page
+            window.location.href = 'yes.html';
+        }
+    </script>
+</body>
+      </html>
+  
