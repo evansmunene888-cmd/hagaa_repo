@@ -183,7 +183,11 @@
             { src: 'njugu.png', caption: 'Nikona Njugu 🥜' },
             { src: 'chips.png', caption: 'Nikona Chips 🍟' }
         ];
-
+        snacks.forEach(snack=>{
+            const img = new Image();
+            img.src = snack.src;
+        });
+        
         let clickCount = 0;
 
         function noClicked() {
